@@ -38,4 +38,14 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
-window.onload = () => { };
+window.onload = async () => {
+  const funcaoFetch = await fetchProducts('computador');
+  const extraiInfo = funcaoFetch
+    .map((product) => ({ sku: product.id, image: product.thumbnail, name: product.title }));
+  // armazenei em uma variável o elemento pai para adicionar os itens
+  const pai = document.getElementsByClassName('items')[0];
+  extraiInfo.forEach((element) => { 
+    const b = createProductItemElement(element);
+    pai.appendChild(b);
+  });
+}; // falta concluir para juntar com o createProductItemElement
