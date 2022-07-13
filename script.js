@@ -27,7 +27,8 @@ const createProductItemElement = ({ sku, name, image }) => {
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = (event) => {
-  // coloque seu código aqui s
+  const esvazia = document.querySelector('.cart__items');
+  esvazia.removeChild(event.target);
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
