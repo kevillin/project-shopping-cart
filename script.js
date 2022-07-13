@@ -25,9 +25,9 @@ const createProductItemElement = ({ sku, name, image }) => {
 };
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
+const esvazia = document.querySelector('.cart__items');
 
 const cartItemClickListener = (event) => {
-  const esvazia = document.querySelector('.cart__items');
   esvazia.removeChild(event.target);
 };
 
@@ -59,3 +59,10 @@ window.onload = async () => {
   const botaoInsere = document.querySelectorAll('.item__add');
   botaoInsere.forEach((element) => element.addEventListener('click', funcaoTeste));
 };
+
+const botaoRemoveTudo = () => {
+  esvazia.innerText = '';
+};
+
+const removeButton = document.querySelector('.empty-cart');
+removeButton.addEventListener('click', botaoRemoveTudo);
