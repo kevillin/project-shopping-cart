@@ -39,25 +39,22 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
-window.onload = async () => {
-  const FetchElement = await fetchProducts('computador');
-  const extraiInfo = FetchElement.map((p) => ({ sku: p.id, image: p.thumbnail, name: p.title })); // armazenei em uma variável o elemento pai para adicionar os itens
-  const pai = document.getElementsByClassName('items')[0];
-  extraiInfo.forEach((element) => { 
-    const b = createProductItemElement(element);
-    pai.appendChild(b);
-  });
-  const funcaoTeste = async (event) => {
-    const sku = getSkuFromProductItem(event.target.parentNode); // extraio o ID do produto usando a função já declarada.
-    const funcaoFetchItem = await fetchItem(sku);
-    const funcaoUsaElement = (
-      { sku, name: funcaoFetchItem.title, salePrice: funcaoFetchItem.price });
-    const elementoPaiCartItem = document.querySelector('.cart__items');
-    const carrinho = createCartItemElement(funcaoUsaElement);
-    elementoPaiCartItem.appendChild(carrinho);
-  };
-  const botaoInsere = document.querySelectorAll('.item__add');
-  botaoInsere.forEach((element) => element.addEventListener('click', funcaoTeste));
+const loading = () => {
+  const header = document.querySelector('.container-title');
+  const elementoCarregando = document.createElement('h1');
+  elementoCarregando.classList.add('loading');
+  elementoCarregando.innerText = 'carregando...';
+  header.appendChild(elementoCarregando);
+};
+
+const funcaoTeste = async (event) => {
+  const sku = getSkuFromProductItem(event.target.parentNode); // extraio o ID do produto usando a função já declarada.
+  const funcaoFetchItem = await fetchItem(sku);
+  const funcaoUsaElement = (
+    { sku, name: funcaoFetchItem.title, salePrice: funcaoFetchItem.price });
+  const elementoPaiCartItem = document.querySelector('.cart__items');
+  const carrinho = createCartItemElement(funcaoUsaElement);
+  elementoPaiCartItem.appendChild(carrinho);
 };
 
 const botaoRemoveTudo = () => {
@@ -66,3 +63,21 @@ const botaoRemoveTudo = () => {
 
 const removeButton = document.querySelector('.empty-cart');
 removeButton.addEventListener('click', botaoRemoveTudo);
+
+loading();
+
+window.onload = async () => {
+  const FetchElement = await fetchProducts('computador');
+  const extraiInfo = FetchElement.map((p) => ({ sku: p.id, image: p.thumbnail, name: p.title })); // armazenei em uma variável o elemento pai para adicionar os itens
+  const pai = document.getElementsByClassName('items')[0];
+  extraiInfo.forEach((element) => { 
+    const b = createProductItemElement(element);
+    pai.appendChild(b);
+  });
+
+  const botaoInsere = document.querySelectorAll('.item__add');
+  botaoInsere.forEach((element) => element.addEventListener('click', funcaoTeste));
+
+  const removeLoading = document.querySelector('h1');
+  removeLoading.remove();
+};
