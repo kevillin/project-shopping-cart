@@ -39,13 +39,22 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
 };
 
 window.onload = async () => {
-  const funcaoFetch = await fetchProducts('computador');
-  const extraiInfo = funcaoFetch
-    .map((product) => ({ sku: product.id, image: product.thumbnail, name: product.title }));
-  // armazenei em uma variável o elemento pai para adicionar os itens
+  const FetchElement = await fetchProducts('computador');
+  const extraiInfo = FetchElement.map((p) => ({ sku: p.id, image: p.thumbnail, name: p.title })); // armazenei em uma variável o elemento pai para adicionar os itens
   const pai = document.getElementsByClassName('items')[0];
   extraiInfo.forEach((element) => { 
     const b = createProductItemElement(element);
     pai.appendChild(b);
   });
-}; // falta concluir para juntar com o createProductItemElement
+  const funcaoTeste = async (event) => {
+    const sku = getSkuFromProductItem(event.target.parentNode); // extraio o ID do produto usando a função já declarada.
+    const funcaoFetchItem = await fetchItem(sku);
+    const funcaoUsaElement = (
+      { sku, name: funcaoFetchItem.title, salePrice: funcaoFetchItem.price });
+    const elementoPaiCartItem = document.querySelector('.cart__items');
+    const carrinho = createCartItemElement(funcaoUsaElement);
+    elementoPaiCartItem.appendChild(carrinho);
+  };
+  const botaoInsere = document.querySelectorAll('.item__add');
+  botaoInsere.forEach((element) => element.addEventListener('click', funcaoTeste));
+};
