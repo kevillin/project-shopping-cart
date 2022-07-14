@@ -4,12 +4,12 @@ const fetchProducts = async (busca) => {
 
   const promiseFetch = await fetch(url);
   const results = await promiseFetch.json();
-  const valorFinal = await results.results;
+  // const valorFinal = await results.results;
   // const sku = await valorFinal.map((element) => element.id);
   // const image = await valorFinal.map((element) => element.thumbnail);
   // const name = await valorFinal.map((element) => element.title);
 
-  return valorFinal;
+  return results;
 };
 
 if (typeof module !== 'undefined') {

@@ -68,8 +68,9 @@ removeButton.addEventListener('click', botaoRemoveTudo);
 loading();
 
 window.onload = async () => {
-  const FetchElement = await fetchProducts('computador');
-  const extraiInfo = FetchElement.map((p) => ({ sku: p.id, image: p.thumbnail, name: p.title })); // armazenei em uma variável o elemento pai para adicionar os itens
+  const fetchElement = await fetchProducts('computador');
+  const extraiInfo = fetchElement.results
+    .map((p) => ({ sku: p.id, image: p.thumbnail, name: p.title })); // armazenei em uma variável o elemento pai para adicionar os itens
   const pai = document.getElementsByClassName('items')[0];
   extraiInfo.forEach((element) => { 
     const b = createProductItemElement(element);
