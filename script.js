@@ -55,6 +55,7 @@ const funcaoTeste = async (event) => {
   const elementoPaiCartItem = document.querySelector('.cart__items');
   const carrinho = createCartItemElement(funcaoUsaElement);
   elementoPaiCartItem.appendChild(carrinho);
+   // aqui está a funcao a ser implementada
 };
 
 const botaoRemoveTudo = () => {
