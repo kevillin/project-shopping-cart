@@ -82,12 +82,12 @@ window.onload = async () => {
   const botaoInsere = document.querySelectorAll('.item__add');
   botaoInsere.forEach((element) => element.addEventListener('click', funcaoFetchProducts));
   
-  const removeLoading = document.querySelector('h1');
-  removeLoading.remove();
   // criar funcao que salva elementos no navegador
   // const esvazia = document.querySelector('.cart__items');
   esvazia.innerHTML = getSavedCartItems();
   esvazia.childNodes.forEach((e) => e.addEventListener('click', cartItemClickListener));
+  const removeLoading = document.querySelector('h1');
+  removeLoading.remove();
 };
 
 botaoRemoveTudo();
