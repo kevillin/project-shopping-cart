@@ -29,7 +29,6 @@ const esvazia = document.querySelector('.cart__items');
 
 const cartItemClickListener = (event) => {
   esvazia.removeChild(event.target);
-  // const elementoPaiCartItem = document.querySelector('.cart__items');
   saveCartItems(esvazia.innerHTML);
 };
 
@@ -54,7 +53,6 @@ const funcaoFetchProducts = async (event) => {
   const funcaoFetchItem = await fetchItem(sku);
   const funcaoUsaElement = (
     { sku, name: funcaoFetchItem.title, salePrice: funcaoFetchItem.price });
-  // const elementoPaiCartItem = document.querySelector('.cart__items');
   const carrinho = createCartItemElement(funcaoUsaElement);
   esvazia.appendChild(carrinho);
   saveCartItems(esvazia.innerHTML);
@@ -64,10 +62,14 @@ const botaoRemoveTudo = () => {
   const removeButton = document.querySelector('.empty-cart');
   removeButton.addEventListener('click', () => {
     esvazia.innerText = '';
-    // const esvazia = document.querySelector('.cart__items');
     saveCartItems(esvazia.innerHTML);
   });
 };
+
+  const elementoPai = document.querySelector('.empty-cart');
+  const precoCarrinho = document.createElement('h1');
+  precoCarrinho.innerText = 'documento carregando';
+  elementoPai.appendChild(precoCarrinho);
 
 window.onload = async () => {
   const fetchElement = await fetchProducts('computador');
@@ -82,8 +84,6 @@ window.onload = async () => {
   const botaoInsere = document.querySelectorAll('.item__add');
   botaoInsere.forEach((element) => element.addEventListener('click', funcaoFetchProducts));
   
-  // criar funcao que salva elementos no navegador
-  // const esvazia = document.querySelector('.cart__items');
   esvazia.innerHTML = getSavedCartItems();
   esvazia.childNodes.forEach((e) => e.addEventListener('click', cartItemClickListener));
   const removeLoading = document.querySelector('h1');
@@ -92,3 +92,8 @@ window.onload = async () => {
 
 botaoRemoveTudo();
 elementoCarregado();
+
+const botaoInsere1 = document.querySelectorAll('.item__add');
+botaoInsere1.forEach((element) => element.addEventListener('click', () => {
+  precoCarrinho.innerText += botaoInsere1.innerText;
+}));

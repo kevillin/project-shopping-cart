@@ -5,8 +5,6 @@ const fetchItem = async (ProductID) => {
   const promiseFetch = await fetch(url);
   const results = await promiseFetch.json();
 
-  // const objeto = await results.id;
-  // const procuraID = await objeto.find((obj) => productID === obj.id);
   return results;
 };
 

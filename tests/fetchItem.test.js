@@ -4,11 +4,9 @@ const item = require("../mocks/item");
 
 describe("2 - Teste a função fetchItem", () => {
   test("se fetchItens é uma função", () => {
-    expect.assertions(1);
     expect(typeof fetchItem).toBe("function");
   });
   test("se a função fetchItem chama o fetch", () => {
-    expect.assertions(1);
     fetchItem("MLB1615760527");
     expect(fetch).toBeCalledTimes(1);
   });
